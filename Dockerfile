@@ -64,14 +64,10 @@ RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_6
     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     conda config --add channels conda-forge && \
     conda config --add channels bioconda && \
-    #conda install mamba=0.23 -y
-#    && \
-#    conda clean -a -y
-#     && \
-     echo "conda activate base" >> ~/.bashrc
+    echo "conda activate base" >> ~/.bashrc
 
 SHELL ["/bin/bash", "-c"]
-RUN conda install mamba=0.24.0 -y
+#RUN conda install mamba=0.24.0 -y
 
 COPY bioinfo.yml .
 RUN . /root/.bashrc && \ 
@@ -80,7 +76,7 @@ RUN . /root/.bashrc && \
     
 RUN mamba env update -n bioinfo --file bioinfo.yml && mamba clean -a -y
 RUN mamba env create -f bioinfo.yml && \
-RUN conda env update --name base --file env.yml
+#RUN conda env update --name base --file env.yml
 ENV PATH /opt/conda/envs/bioinfo/bin:$PATH
 RUN echo "conda activate bioinfo" >> ~/.bashrc
 
