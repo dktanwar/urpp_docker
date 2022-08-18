@@ -67,7 +67,7 @@ RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_6
     echo "conda activate base" >> ~/.bashrc
 
 SHELL ["/bin/bash", "-c"]
-#RUN conda install mamba=0.24.0 -y
+RUN conda install mamba=0.24.0 -y
 
 COPY bioinfo.yml .
 RUN . /root/.bashrc && \ 
