@@ -57,26 +57,31 @@ RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificate
     libglib2.0-0 libxext6 libsm6 libxrender1 \
     git mercurial subversion
 
-RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh -O ~/anaconda.sh && \
-    /bin/bash ~/anaconda.sh -b -p /opt/conda && \
-    rm ~/anaconda.sh && \
+RUN wget --quiet -O ~/miniconda3.sh https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Linux-x86_64.sh \
+    && /bin/bash ~/miniconda3.sh -b -p /opt/conda\
+    && rm ~/miniconda3.sh && \
     ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
     echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
     conda config --add channels conda-forge && \
     conda config --add channels bioconda && \
     echo "conda activate base" >> ~/.bashrc
+ENV PATH /root/miniconda3/bin:$PATH
+
+
 
 SHELL ["/bin/bash", "-c"]
-RUN conda install mamba=0.24.0 -y
+#RUN conda install mamba=0.24.0 -y
 
 COPY bioinfo.yml .
 RUN . /root/.bashrc && \ 
     conda create -n bioinfo -y && \
     conda activate bioinfo
-    
+
+RUN conda install mamba -y    
 RUN mamba env update -n bioinfo --file bioinfo.yml && mamba clean -a -y
-RUN mamba env create -f bioinfo.yml && \
-#RUN conda env update --name base --file env.yml
+RUN rm /opt/conda/envs/bioinfo/bin/R /opt/conda/envs/bioinfo/bin/Rscript
+#RUN mamba env create -f bioinfo.yml && \
+##RUN conda env update --name base --file env.yml
 ENV PATH /opt/conda/envs/bioinfo/bin:$PATH
 RUN echo "conda activate bioinfo" >> ~/.bashrc
 
