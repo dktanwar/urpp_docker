@@ -1,4 +1,3 @@
-alias vim=nvim
 alias today="date '+%Y%m%d'"
 
 parse_git_branch() {

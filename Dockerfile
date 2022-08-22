@@ -31,7 +31,9 @@ RUN apt-get update && apt-get install -y \
     libcairo2-dev \
     libxt-dev \
     xtail \
-    wget
+    wget \
+    nano \
+    emacs
 
 RUN wget --no-verbose https://download3.rstudio.org/ubuntu-18.04/x86_64/VERSION -O "version.txt" && \
     VERSION=$(cat version.txt)  && \
@@ -105,5 +107,8 @@ CMD [ "R" ]
 CMD [ "/init" ]
 #CMD [ "/usr/bin/shiny-server" ]
 
+RUN mkdir -p /project/bin
+COPY create_project /project/bin/.
+ENV PATH /project/bin/:$PATH
 
 EXPOSE 8787 3838

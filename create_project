@@ -1,0 +1,5 @@
+#!/bin/bash
+
+pr=$1
+
+git clone https://github.com/dktanwar/project_structure.git && mv project_structure $pr && (cd $pr && rm -rf .git) 
