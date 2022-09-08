@@ -3,7 +3,7 @@
 ## Building the image locally
 1.  Clone the repo locally
 ```
-git clone git@github.com:dktanwar/urpp_docker.git
+git clone https://github.com/dktanwar/urpp_docker.git
 ```
 
 2. Enter into directory
