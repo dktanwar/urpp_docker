@@ -111,4 +111,9 @@ RUN mkdir -p /project/bin
 COPY create_project /project/bin/.
 ENV PATH /project/bin/:$PATH
 
+COPY .Renviron /root/.Renviron
+COPY .Renviron /home/rstudio/.Renviron
+COPY .Rprofile /root/.Rprofile
+COPY .Rprofile /home/rstudio/.Rprofile
+
 EXPOSE 8787 3838
