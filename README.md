@@ -20,7 +20,7 @@ docker build . -t bsseq
 
 1. Enter into container while mounting directory
 ```
-docker run --rm -it --entrypoint /bin/bash -v /mnt/:/home/rstudio bsseq 
+docker run -v /mnt/:/home/rstudio --hostname cutag --name cutag -ti cutag bash --login
 ```
 _You are mounting `/mnt/` of your computer to `/home/rstudio` of container_
 
